@@ -4,6 +4,7 @@ import 'package:greengrocer/src/config/app_data.dart' as appData;
 
 import '../../models/cart_item_model.dart';
 import '../../services/utils_services.dart';
+import '../common_widgets/payment_dialog.dart';
 import 'components/cart_tile.dart';
 
 class CartTab extends StatefulWidget {
@@ -97,6 +98,13 @@ class _CartTabState extends State<CartTab> {
                         )),
                     onPressed: () async {
                       bool? result = await showOrderConfimartion();
+                      if (result ?? false) {
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return PaymentDialog(order: appData.orders.first);
+                            });
+                      }
                     },
                     child: const Text('Concluir pedido',
                         style: TextStyle(
