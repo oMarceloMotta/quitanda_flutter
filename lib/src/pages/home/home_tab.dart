@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../config/custom_colors.dart';
+import '../../services/utils_services.dart';
+import '../common_widgets/app_name_widget.dart';
 import 'components/category_tile.dart';
 import 'package:greengrocer/src/config/app_data.dart' as appData;
 
@@ -22,6 +24,7 @@ class _HomeTabState extends State<HomeTab> {
     'Temperos',
     'Cereais',
   ];
+  final UtilsServices utilsServices = UtilsServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,15 +52,7 @@ class _HomeTabState extends State<HomeTab> {
                 ),
               ),
             ],
-            title: Text.rich(
-                TextSpan(style: const TextStyle(fontSize: 30), children: [
-              TextSpan(
-                  text: 'Green',
-                  style: TextStyle(color: CustomColors.customSwatchColor)),
-              TextSpan(
-                  text: 'grocer',
-                  style: TextStyle(color: CustomColors.customContrastColor)),
-            ]))),
+            title: const AppNameWidget()),
         body: Column(
           children: [
             Padding(
