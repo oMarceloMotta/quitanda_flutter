@@ -8,9 +8,9 @@ import '../pages/base/base_screen.dart';
 abstract class AppPage {
   static final pages = <GetPage>[
     GetPage(page: () => const SplashScreen(), name: PagesRoutes.splashRoute),
-    GetPage(page: () => const SignInScreen(), name: PagesRoutes.signinRoute),
+    GetPage(page: () => SignInScreen(), name: PagesRoutes.signinRoute),
     GetPage(page: () => SignUpScreen(), name: PagesRoutes.signupRoute),
-    GetPage(page: () => BaseScreen(), name: PagesRoutes.baseRoute),
+    GetPage(page: () => const BaseScreen(), name: PagesRoutes.baseRoute),
   ];
 }
 

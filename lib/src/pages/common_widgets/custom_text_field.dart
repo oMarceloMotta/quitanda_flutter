@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomTextField extends StatefulWidget {
-  const CustomTextField({
-    super.key,
-    required this.icon,
-    required this.label,
-    this.isSecret = false,
-    this.inputFormatters,
-    this.initialValue,
-    this.readOnly = false,
-  });
+  const CustomTextField(
+      {super.key,
+      required this.icon,
+      required this.label,
+      this.isSecret = false,
+      this.inputFormatters,
+      this.initialValue,
+      this.readOnly = false,
+      this.validator});
   final bool readOnly;
   final String? initialValue;
   final IconData icon;
   final String label;
   final bool isSecret;
   final List<TextInputFormatter>? inputFormatters;
-
+  final String? Function(String?)? validator;
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
@@ -40,6 +40,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         readOnly: widget.readOnly,
         inputFormatters: widget.inputFormatters,
         obscureText: isObscure,
+        validator: widget.validator,
         decoration: InputDecoration(
           prefixIcon: Icon(widget.icon),
           suffixIcon: widget.isSecret
