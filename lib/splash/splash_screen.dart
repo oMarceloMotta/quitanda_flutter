@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../src/config/custom_colors.dart';
 import '../src/pages/auth/sign_in_screen.dart';
 import '../src/pages/common_widgets/app_name_widget.dart';
+import '../src/pages_routes/app_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,10 +18,13 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (c) {
-        return const SignInScreen();
-      }));
+      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (c) {
+      //   return const SignInScreen();
+      // }));
+
+      Get.offNamed(PagesRoutes.signinRoute);
     });
+
   }
 
   @override

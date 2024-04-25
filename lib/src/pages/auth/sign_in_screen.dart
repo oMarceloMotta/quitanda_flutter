@@ -1,11 +1,11 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../base/base_screen.dart';
+import '../../pages_routes/app_page.dart';
 import '../../config/custom_colors.dart';
 import '../common_widgets/app_name_widget.dart';
 import '../common_widgets/custom_text_field.dart';
-import 'sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -82,10 +82,11 @@ class SignInScreen extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18))),
                           onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (c) {
-                              return const BaseScreen();
-                            }));
+                            Get.toNamed(PagesRoutes.baseRoute);
+                            // Navigator.of(context).pushReplacement(
+                            //     MaterialPageRoute(builder: (c) {
+                            //   return const BaseScreen();
+                            // }));
                           },
                           child: const Text(
                             'Entrar',
@@ -140,11 +141,7 @@ class SignInScreen extends StatelessWidget {
                                       width: 2, color: Colors.green),
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (c) {
-                                      return SignUpScreen();
-                                    }),
-                                  );
+                                  Get.toNamed(PagesRoutes.signupRoute);
                                 },
                                 child: const Text(
                                   'Criar conta',
