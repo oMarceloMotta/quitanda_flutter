@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:greengrocer/src/pages/auth/controller/auth_controller.dart';
 
 import '../../pages_routes/app_page.dart';
 import '../../config/custom_colors.dart';
@@ -14,6 +15,8 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
 
     return Scaffold(
       backgroundColor: CustomColors.customSwatchColor,
@@ -70,6 +73,7 @@ class SignInScreen extends StatelessWidget {
                       children: [
                         CustomTextField(
                           label: 'E-mail',
+                          controller: emailController,
                           icon: Icons.email,
                           validator: (email) {
                             if (email == null || email.isEmpty) {
@@ -85,6 +89,7 @@ class SignInScreen extends StatelessWidget {
                         CustomTextField(
                             label: 'Senha',
                             icon: Icons.lock,
+                            controller: passwordController,
                             isSecret: true,
                             validator: (password) {
                               if (password == null || password.isEmpty) {
@@ -97,26 +102,42 @@ class SignInScreen extends StatelessWidget {
                             }),
                         SizedBox(
                           height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18))),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                Get.toNamed(PagesRoutes.baseRoute);
-                              }
+                          child: GetX<AuthController>(
+                            builder: (authController) {
+                              return ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.green,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18))),
+                                onPressed: authController.isLoading.value
+                                    ? null
+                                    : () {
+                                        //fechar teclado
+                                        FocusScope.of(context).unfocus();
+                                        if (_formKey.currentState!.validate()) {
+                                          String email = emailController.text;
+                                          String password =
+                                              passwordController.text;
+                                          authController.signIn(
+                                              email: email, password: password);
+                                          Get.toNamed(PagesRoutes.baseRoute);
+                                        }
 
-                              // Navigator.of(context).pushReplacement(
-                              //     MaterialPageRoute(builder: (c) {
-                              //   return const BaseScreen();
-                              // }));
+                                        // Navigator.of(context).pushReplacement(
+                                        //     MaterialPageRoute(builder: (c) {
+                                        //   return const BaseScreen();
+                                        // }));
+                                      },
+                                child: authController.isLoading.value
+                                    ? const CircularProgressIndicator()
+                                    : const Text(
+                                        'Entrar',
+                                        style: TextStyle(
+                                            fontSize: 18, color: Colors.white),
+                                      ),
+                              );
                             },
-                            child: const Text(
-                              'Entrar',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white),
-                            ),
                           ),
                         ),
                         Align(
