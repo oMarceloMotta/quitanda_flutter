@@ -121,7 +121,7 @@ class SignInScreen extends StatelessWidget {
                                               passwordController.text;
                                           authController.signIn(
                                               email: email, password: password);
-                                          Get.toNamed(PagesRoutes.baseRoute);
+                                          //Get.toNamed(PagesRoutes.baseRoute);
                                         }
 
                                         // Navigator.of(context).pushReplacement(
