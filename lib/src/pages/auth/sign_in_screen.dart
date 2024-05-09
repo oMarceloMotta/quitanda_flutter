@@ -5,6 +5,7 @@ import 'package:greengrocer/src/pages/auth/controller/auth_controller.dart';
 
 import '../../pages_routes/app_page.dart';
 import '../../config/custom_colors.dart';
+import '../../services/validators.dart';
 import '../common_widgets/app_name_widget.dart';
 import '../common_widgets/custom_text_field.dart';
 
@@ -72,34 +73,17 @@ class SignInScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         CustomTextField(
-                          label: 'E-mail',
-                          controller: emailController,
-                          icon: Icons.email,
-                          validator: (email) {
-                            if (email == null || email.isEmpty) {
-                              return 'Digite seu e-mail';
-                            }
-                            if (!email.isEmail) {
-                              return 'Digite seu e-mail válido!';
-                            }
-
-                            return null;
-                          },
-                        ),
+                            label: 'E-mail',
+                            controller: emailController,
+                            icon: Icons.email,
+                            validator: emailValidator),
                         CustomTextField(
-                            label: 'Senha',
-                            icon: Icons.lock,
-                            controller: passwordController,
-                            isSecret: true,
-                            validator: (password) {
-                              if (password == null || password.isEmpty) {
-                                return 'Digite sua senha!';
-                              }
-                              if (password.length < 7) {
-                                return 'Digite sua senha com pelo menos 7 caracteres';
-                              }
-                              return null;
-                            }),
+                          label: 'Senha',
+                          icon: Icons.lock,
+                          controller: passwordController,
+                          isSecret: true,
+                          validator: passwordValidator,
+                        ),
                         SizedBox(
                           height: 50,
                           child: GetX<AuthController>(
